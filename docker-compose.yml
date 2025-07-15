@@ -1,0 +1,62 @@
+version: '3.8'
+
+services:
+  backend:
+    container_name: ajay812_backend
+    build: ./Backend
+    ports:
+      - "3072:3072"
+    environment:
+      - PORT=3072
+      - DB_USER=postgres
+      - DB_PASSWORD=admin123
+      - DB_NAME=new_employee_db
+      - DB_HOST=postgres
+      - DB_PORT=5432
+    depends_on:
+      - postgres
+    networks:
+      - ajay812_net
+
+  frontend:
+    container_name: ajay812_frontend
+    build: ./Frontend
+    ports:
+      - "8132:80"
+    depends_on:
+      - backend
+    networks:
+      - ajay812_net
+
+  hr_page:
+    container_name: ajay812_hr_page
+    build: ./HR_page
+    ports:
+      - "8133:80"
+    depends_on:
+      - backend
+    networks:
+      - ajay812_net
+
+  postgres:
+    container_name: ajay812_postgres
+    image: postgres:13
+    ports:
+      - "5472:5432"
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=admin123
+      - POSTGRES_DB=new_employee_db
+    volumes:
+      - pgdata812:/var/lib/postgresql/data
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - ajay812_net
+
+volumes:
+  pgdata812:
+
+networks:
+  ajay812_net:
+    driver: bridge
+
