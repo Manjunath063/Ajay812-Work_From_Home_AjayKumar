@@ -19,14 +19,14 @@ const pool = new Pool({
 app.use(cors({
   origin: [
     process.env.FRONTEND_URL,
-    "http://56.228.36.89:3072",
+    "http://16.171.250.116:3072",
     "http://127.0.0.1:5500",
-    "http://56.228.36.89:5500",
+    "http://16.171.250.116:5500",
     "http://127.0.0.1:5501",
     "http://127.0.0.1:5503", // Added to allow requests from this origin
-    "http://56.228.36.89:5503", // Added to allow requests from this origin
-    "http://56.228.36.89:8132",
-    "http://56.228.36.89:8133"
+    "http://16.171.250.116:5503", // Added to allow requests from this origin
+    "http://16.171.250.116:8132",
+    "http://16.171.250.116:8133"
   ],
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
@@ -202,5 +202,5 @@ app.get('/hr', (req, res) => {
 
 // Start server
 app.listen(port, () => {
-  console.log(`Server running on http://56.228.36.89:${port}`);
+  console.log(`Server running on http://16.171.250.116:${port}`);
 });
